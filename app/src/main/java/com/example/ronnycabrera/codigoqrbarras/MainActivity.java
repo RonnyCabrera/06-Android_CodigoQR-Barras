@@ -1,6 +1,7 @@
 package com.example.ronnycabrera.codigoqrbarras;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
@@ -9,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -96,6 +98,13 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result result) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        //alertDialog.setMessage("MENSAJE CUALQUIERA");
+        alertDialog.setMessage(result.getBarcodeFormat().toString());
+        alertDialog.setMessage(result.getText());
 
+        Log.e("resultado;",result.getText());
+        Log.e("resultadoBar:",result.getBarcodeFormat().toString());
+        onResume();
     }
 }
