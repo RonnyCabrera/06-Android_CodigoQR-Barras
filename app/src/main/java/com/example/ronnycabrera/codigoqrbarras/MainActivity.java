@@ -87,9 +87,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
                             if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
                                 requestPermissions(new String[]{Manifest.permission.CAMERA},REQUESTCAMERA);
-
                             }
-
                         }
                     }
                 }
