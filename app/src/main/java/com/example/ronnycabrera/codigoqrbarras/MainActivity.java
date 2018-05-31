@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -68,6 +69,29 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     protected void onDestroy() {
         super.onDestroy();
         scannerView.stopCamera();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        //PERMISOS UN CASE POR CADA PERMISO
+        switch (requestCode){
+            case REQUESTCAMERA:
+                if(grantResults.length>0){
+                    boolean aceptaPermiso = grantResults[0]==PackageManager.PERMISSION_GRANTED;
+                    if(aceptaPermiso){
+
+                    }else{
+                        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                            if(shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)){
+                                requestPermissions(new String[]{Manifest.permission.CAMERA},REQUESTCAMERA);
+
+                            }
+
+                        }
+                    }
+                }
+        }
     }
 
     @Override
