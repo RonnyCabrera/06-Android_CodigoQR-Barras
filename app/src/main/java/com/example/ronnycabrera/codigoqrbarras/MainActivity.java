@@ -46,6 +46,25 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        int apiVersion=Build.VERSION.SDK_INT;
+        if(apiVersion>= Build.VERSION_CODES.M) {
+            if (verficarPermisos()) {
+                if (scannerView == null) {
+                    scannerView = new ZXingScannerView(this);
+                    setContentView(scannerView);
+                }
+                scannerView.setResultHandler(this);
+                scannerView.startCamera();
+            }else{
+                solicitarPermisos();
+
+            }
+        }
+    }
+
+    @Override
     public void handleResult(Result result) {
 
     }
